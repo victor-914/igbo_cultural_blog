@@ -15,16 +15,14 @@ function IndexScreen() {
   return (
     <>
       <Logo />
-      <Menu />
       <HeroSection />
-      <SubHeroContainer />
+      {/* <SubHeroContainer /> */}
       <MostRead />
-      <Catergory />
+      {/* <Catergory /> */}
       <Videos />
       <CatergorySummary />
       <Donate />
       <NewsLetter />
-      <Footer />
     </>
   );
 }

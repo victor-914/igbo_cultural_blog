@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 import Head from "next/head";
-import {Helmet} from "react-helmet";
- 
+import { Helmet } from "react-helmet";
+import Menu from "../components/menu/Menu";
+import Footer from "../components/footer/Footer"
 function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -33,9 +34,15 @@ function MyApp({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <title>WhiteList Technologies</title>
         <link rel="canonical" href="http://mysite.com/example" />
-        <meta name="description" content="Enginnner and Communication Technology" />
+        <meta
+          name="description"
+          content="Enginnner and Communication Technology"
+        />
       </Helmet>
+      <Menu />
       <Component {...pageProps} />
+      <Footer />
+
     </>
   );
 }

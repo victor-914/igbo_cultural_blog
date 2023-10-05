@@ -9,6 +9,8 @@ const StyledFooter = styled.section`
   justify-content: space-evenly;
   align-items: center;
   color: #fff;
+  position: sticky;
+  bottom: 0px;
 
   .subNav {
     width: 18%;

@@ -1,22 +1,22 @@
-::after,::before,html,
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap");
+
+::after,
+::before,
+html,
 body {
   padding: 0;
   margin: 0;
-  font-family: ubuntu;
-   overflow-x: hidden; 
-  
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
 }
-
-
 
 ::-webkit-scrollbar {
   width: 4px;
-  height: AUTO;
- 
+  height: 1px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background:#e3173e;
+  background: #00a1df;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,4 +27,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
