@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const StyledNewsLetter = styled.section`
-  width: 95%;
+  width: 75%;
   height: 50vh;
   margin: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-top: 8vh;
 
   .signUpNewsLetter {
     width: 68%;
@@ -184,6 +185,7 @@ const StyledNewsLetter = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     /* background: red; */
     height: auto;
+    width: 100%;
     flex-direction: column;
     margin-top: 50px;
 

@@ -1,33 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { FaHeart, FaComment } from "react-icons/fa";
-import img from "../../assets/dada.jpg";
 import Image from "next/image";
+import loading from "../../assets/loading-icon.webp";
+import { useRouter } from "next/router";
+const PostCard = (props) => {
+  const router = useRouter();
 
-const PostCard = ({ title, description, imageUrl }) => {
+  const [data, setData] = useState();
+  useEffect(() => {
+    setData(props?.data?.attributes?.post_banner?.data?.attributes?.url);
+    return () => {};
+  }, []);console.log(
+    "props",
+    props?.data?.attributes?.post_banner?.data?.attributes?.url
+  );
+
   return (
-    <CardContainer>
+    <CardContainer onClick={() => router.push(`/_blog/${props.data.id}`)}>
       <CardImageCont>
-        <Image src={img} layout="fill" />
+        <Image
+          src={data ? data : loading}
+          onError={() => setData(loading)}
+          layout="fill"
+        />
       </CardImageCont>
       <CardContent>
-        <Title>Dada man</Title>
-        <Description>{description}</Description>
-        <IconContainer>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia
-          elit ac accumsan fermentum. Nulla eget ligula at nibh maximus posuere
-          ac interdum elit. Aenean feugiat pretium justo vel suscipit.
-          Suspendisse potenti. Integer hendrerit consequat lacinia. Cras
-          malesuada ipsum ac pretium condimentum. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Phasellus scelerisque nisi vel lectus dictum, finibus eleifend mi
-          maximus. Duis vel molestie urna, eu malesuada lorem. Cras blandit,
-          mauris quis iaculis pharetra, dui metus laoreet orci, vel dapibus
-          metus mauris nec lectus. Donec accumsan libero lorem, quis convallis
-          arcu fringilla in. Ut consectetur sapien eu leo interdum, ut pulvinar
-          mauris commodo. jjdjdjdjfhhfjfjfjfjfkekek
-        </IconContainer>
+        <Description>{props?.data?.attributes?.post_catergory}</Description>
+        <Title>{props?.data?.attributes?.post_title}</Title>
+        <IconContainer>{props?.data?.attributes?.post_content}</IconContainer>
       </CardContent>
+      <Button>Read more...</Button>
     </CardContainer>
   );
 };
@@ -44,16 +47,19 @@ const fadeIn = keyframes`
 `;
 
 const CardContainer = styled.div`
-  width: 400px;
+  width: 320px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.3s ease-in-out;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
+
+ 
 `;
 
 const CardImageCont = styled.div`
@@ -71,9 +77,13 @@ const Title = styled.h3`
   margin-bottom: 10px;
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
-  color: #666;
+  /* color: #666; */
+  padding: 0px;
+  margin: 0%;
+  color: #e3173e;
+  font-weight: 600;
 `;
 
 const IconContainer = styled.div`
@@ -81,21 +91,19 @@ const IconContainer = styled.div`
   justify-content: space-between;
   margin-top: 16px;
   max-height: 100px;
+  line-height: 1.5;
   height: 100px;
-  overflow:clip;
-
+  overflow: clip;
 `;
 
-const Icon = styled.div`
-  display: flex;
-  align-items: center;
-  color: #333;
+const Button = styled.div`
+  color: #fff;
+  width: 100%;
+  font-weight: 500;
+  background-color: #333;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
-
-  &:hover {
-    color: #e44d26; /* Adjust the hover color as needed */
-  }
+  padding: 8px;
 
   & + & {
     margin-left: 10px;

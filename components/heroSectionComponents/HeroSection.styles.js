@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledHeroSection = styled.section`
-  width: 97%;
-  height: 120vh;
+  width: 75%;
+  height: auto;
   margin: auto;
 
   .mainContentContainer {
@@ -11,19 +11,20 @@ const StyledHeroSection = styled.section`
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.3); */
   }
 
   .mainHeroContent {
     width: 50%;
-    height: 95%;
+    height: 100%;
     border-right: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   .mainHeroContentImg {
     width: 98%;
-    height: 65%;
+    height: 50vh;
     margin: auto;
     position: relative;
   }
@@ -37,9 +38,8 @@ const StyledHeroSection = styled.section`
   }
 
   .catergoryName {
-    /* background-color: #e3120b; */
     border-radius: 20px;
-    width: 20%;
+    width: 100%;
     color: #e3120b;
     font-weight: 700;
     font-size: 14px;
@@ -64,7 +64,7 @@ const StyledHeroSection = styled.section`
     margin: auto;
     line-height: 1.5;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .sideHeroContent {
@@ -87,11 +87,12 @@ const StyledHeroSection = styled.section`
   .sideHeroMainContentImg {
     position: relative;
     width: 98%;
-    height: 60%;
+    height: 400px;
     margin: auto;
   }
 
   .sideHeroMainContentTextContainer {
+    margin-top: 6px;
   }
 
   .sideHeroMainContentMainText {
@@ -100,6 +101,7 @@ const StyledHeroSection = styled.section`
     cursor: pointer;
     width: 95%;
     margin: auto;
+    font-weight: 500;
   }
 
   .sideHeroMainContentMainText:hover {
@@ -110,9 +112,9 @@ const StyledHeroSection = styled.section`
     font-size: 16px;
     line-height: 1.3;
     margin: auto;
-    margin-top: 8px;
+    margin-top: 3px;
     width: 95%;
-    font-weight: 300;
+    font-weight: 400;
     color: #1f2024;
   }
 
@@ -120,6 +122,11 @@ const StyledHeroSection = styled.section`
     width: 98%;
     height: 35%;
     margin: auto;
+  }
+
+  #aside_demo_img{
+    position: absolute !important;
+    top: 0px !important;
   }
 
   .asideCarousel {
@@ -171,8 +178,10 @@ const StyledHeroSection = styled.section`
 
   @media (min-width: 320px) and (max-width: 480px) {
     margin: auto;
+    width: 100%;
     height: auto;
-    padding-bottom: 10vh;
+    padding-top: 4vh;
+    /* padding-bottom: 10vh; */
 
     .mainContentContainer {
       flex-direction: column;
@@ -182,14 +191,16 @@ const StyledHeroSection = styled.section`
 
     .mainHeroContent {
       width: 96%;
+      margin: auto;
       height: 60%;
       border: none;
+      margin-bottom: 30px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     }
 
     .mainHeroContentImg {
       width: 100%;
-      height: auto;
+      height: 40vh;
     }
 
     .mainTitle {
@@ -210,6 +221,8 @@ const StyledHeroSection = styled.section`
       width: 100%;
       height: auto;
       border: none;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     }
 
     .sideHeroMainContent {
@@ -220,6 +233,10 @@ const StyledHeroSection = styled.section`
       width: 96%;
       height: 60%;
       padding-bottom: 10px;
+    }
+
+    .sideHeroMainContentImg{
+    height: 300px;
     }
 
     .sideHeroMainContentSubText {

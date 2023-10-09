@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 const StyledDonate = styled.section`
-  width: 95%;
+  width: 75%;
   height: 50vh;
   margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  padding-top: 5vh;
 
   .donateImg {
     position: relative;
@@ -49,6 +50,7 @@ const StyledDonate = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     /* background: red; */
     height: auto;
+    width: 100%;
     margin-top: 50px;
     flex-direction: column;
 

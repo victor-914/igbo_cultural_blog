@@ -11,16 +11,17 @@ import NewsLetter from "../components/newsLetter/NewsLetter";
 import SubHeroContainer from "../components/subHeroSectionComponents/SubHeroContainer";
 import Videos from "../components/videos/Videos";
 
-function IndexScreen() {
+function IndexScreen({ data }) {
+  console.log(data, "INDEXsCREEN");
   return (
     <>
       <Logo />
-      <HeroSection />
+      <HeroSection prop={data?.data} />
       {/* <SubHeroContainer /> */}
-      <MostRead />
+      <MostRead prop={data?.data} />
       {/* <Catergory /> */}
       <Videos />
-      <CatergorySummary />
+      {/* <CatergorySummary /> */}
       <Donate />
       <NewsLetter />
     </>

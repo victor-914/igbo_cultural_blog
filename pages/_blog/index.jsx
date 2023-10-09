@@ -1,92 +1,118 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PostCard from "../../components/cards/PostCard";
-import styled from "styled-components";
-import { Tab } from "../../components/tabs/Tab";
-function Blog() {
-  const [activeTab, setActiveTab] = useState("");
+import styled, { keyframes } from "styled-components";
+import api, { fetcher } from "../../utils/api";
+import Pagination from "../../components/pagination/Pagination";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import Select from "react-select";
+function Blog({ blogProps }) {
+  const [pageIndex, setPageIndex] = useState(1);
+  const [posts, setPosts] = useState([]);
+  const router = useRouter();
+  const [selectedOption, setSelectedOption] = useState(null);
+  const options = [
+    { value: "mythology and folklore", label: "mythology and folklore" },
+    {
+      value: "Traditional Clothing and Fashion",
+      label: "Traditional Clothing and Fashion",
+    },
+    { value: "Religious Practices", label: "Religious Practices" },
+    {
+      value: "Cultural events and exhibition",
+      label: "Cultural events and exhibition",
+    },
+    { value: "Traditional Cuisine", label: "Traditional Cuisine" },
+    { value: "Art and Creativity", label: "Art and Creativity" },
+    { value: "History and Heritage", label: "History and Heritage" },
+    { value: "Music", label: "Music" },
+  ];
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=15`,
+    fetcher,
+    {
+      fallbackData: blogProps,
+    }
+  );
+
+  const handleSelect = (e) => {
+    const text = e.value;
+    const textArray = text.split(" ");
+    const joinedText = textArray.join("").toLowerCase();
+    router.push(`?catergory=${joinedText}`, undefined, { shallow: true });
+    let catValue = router.query.catergory;
+    const filteredPost = posts.filter((item) => {
+      let catergory = item.attributes.post_catergory.split(" ").join("");
+      item.attributes.post_catergory = catergory;
+      return item.attributes.post_catergory === catValue;
+    });
+
+    setPosts(filteredPost);
   };
+  useEffect(() => {
+    router.push(
+      `?catergory=${options[0].label.split(" ").join("")}`,
+      undefined,
+      { shallow: true }
+    );
 
-  const tabs = [
-    "Matriachy",
-    "Patricarchy",
-    "Festivals",
-    "Culture",
-    // "Patricarchy",
-    // "Festidssazdvals",
-    // "Cultuasddsxxcre",
-    // "Matrissxzdvachy",
-    // "Patricdcdsarchy",
-    // "Festivals",
-  ];
+    return () => {};
+  }, []);
 
-  const tabContent = [
-    {
-      _id: "hfhfh",
-      cat: "Matriachy",
-      content: "fhfhfhfhegegdgdgdh",
-    },
-    {
-      _id: "hfhfqh",
-      cat: "Patricarchy",
-      content: "fhfhfhfhchchhssyuiaisegegdgdgdh",
-    },
-    {
-      _id: "hfwhfh",
-      cat: "tabone",
-      content: "fhfhfhfhegegdgdgdh",
-    },
-    {
-      _id: "hfhfh",
-      cat: "Festivals",
-      content: "fhfhfhfhchchhssyuiaisegegdgdgdh",
-    },
-    {
-      _id: "hfhdfh",
-      cat: "tabone",
-      content: "fhfhfhfhegegdgdgdh",
-    },
-    {
-      _id: "hfhfwh",
-      cat: "Culture",
-      content: "fhfhfhfhchchhssyuiaisegegdgdgdh",
-    },
-  ];
+  useEffect(() => {
+    const { query } = router;
+    const handleQuery = () => {
+      const categoryFromURL = query.catergory;
+      const filteredPost = blogProps?.data?.filter((item) => {
+        let catergory = item.attributes.post_catergory.split(" ").join("");
+        item.attributes.post_catergory = catergory;
+        return item.attributes.post_catergory === categoryFromURL;
+      });
+      setPosts(filteredPost);
+    };
+
+    handleQuery();
+
+    return () => {
+      setPosts([]);
+    };
+  }, [router.query]);
+
   return (
     <StyledBlog>
       <header>Blog Posts</header>
-
-      <aside className="tabCont">
-        {tabs.map((item) => (
-          <li
-            key={item}
-            className="tabHeader"
-            style={{
-              color: item === activeTab ? "#fff" : "#000",
-              backgroundColor: item === activeTab ? "#333" : "transparent",
-            }}
-            onClick={() => setActiveTab(item)}
-          >
-            {item}
-          </li>
-        ))}
-      </aside>
+      <main className="selectContainer">
+        <Select
+          defaultValue={selectedOption}
+          onChange={(e) => handleSelect(e)}
+          options={options}
+          isSearchable={false}
+        />
+      </main>
 
       <main className="tabContContainer">
-        {tabContent.map(
-          (item) =>
-            item.cat === activeTab && (
-              <div className="content" key={item._id}>
-                <PostCard />
-                <PostCard /> <PostCard /> <PostCard /> <PostCard /> <PostCard />{" "}
-                <PostCard /> <PostCard /> <PostCard /> <PostCard /> <PostCard />{" "}
-                <PostCard /> <PostCard />
-              </div>
-            )
+        {posts.length !== 0 ? (
+          posts?.map((item) => <PostCard key={item.id} data={item} />)
+        ) : (
+          <div
+            style={{
+              width: "100vw",
+              height: "50vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            No content yet...
+          </div>
         )}
       </main>
+      <Pagination
+        data={data?.meta}
+        stateIndex={pageIndex}
+        setstateIndex={setPageIndex}
+      />
     </StyledBlog>
   );
 }
@@ -94,43 +120,49 @@ function Blog() {
 export default Blog;
 
 const StyledBlog = styled.section`
-  /* background-color: red; */
   width: 100%;
   height: auto;
   margin: auto;
   /* display: flex; */
   padding-top: 20px;
 
+  .selectContainer {
+    width: 90%;
+    margin: auto;
+  }
+
   header {
     width: 100%;
     padding: 10px;
     font-size: 30px;
-    font-weight: 800;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    line-height: 3;
     margin: auto;
   }
   .tabCont {
-    max-width: 60%;
     width: 100%;
-    height: 50px;
+    height: 100%;
     margin: auto;
-    padding: 10px;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
+    justify-content: space-between;
     border: 2px solid #00a1df;
     overflow-x: scroll;
-    overflow-y: hidden;
-    border-radius: 7px;
+    border-left: none;
+    border-right: none;
+    overflow-y: auto;
+    border-radius: none;
   }
 
   .tabHeader {
     list-style: none;
-    font-size: 20px;
+    font-size: 16px;
     height: 100%;
     width: auto;
-    padding: 4px 10px 4px 10px;
+    letter-spacing: -1px;
     display: flex;
-    margin: 0px 20px 0px 20px;
     align-items: center;
     padding: 10px;
     justify-content: space-around;
@@ -138,7 +170,8 @@ const StyledBlog = styled.section`
   }
 
   .tabHeader:hover {
-    background-color: red;
+    background-color: #00a1df !important;
+    color: #fff !important;
   }
 
   .tabContContainer {
@@ -146,15 +179,89 @@ const StyledBlog = styled.section`
     height: auto;
     padding-bottom: 50px;
     margin: auto;
-  }
-
-  .content {
-    height: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    row-gap: 100px;
-    padding-top: 20px;
+    row-gap: 50px;
+    padding-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .selectContainer {
+      display: block;
+    }
+
+    .tabContContainer {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 810px) {
+    .tabContContainer {
+      width: 100%;
+    }
+  }
+`;
+
+export const getStaticProps = async () => {
+  const blog = await api.get(
+    `/posts?populate=*&pagination[page]=1&pagination[pageSize]=15`
+  );
+  let blogProps = blog.data;
+  return { props: { blogProps } };
+};
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const MobileMenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 100%;
+  background-color: purple;
+  position: relative;
+
+  .icon {
+    font-size: 50px;
+  }
+
+  .filter {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    word-spacing: 3cqw;
+  }
+`;
+
+const MenuList = styled.select`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  left: 14px;
+  color: #333;
+  background-color: green;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  opacity: 1;
+  animation: ${fadeIn} 0.3s ease-in-out;
+`;
+const MenuItem = styled.option`
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  background-color: red;
+  &:hover {
+    background-color: #788803;
   }
 `;

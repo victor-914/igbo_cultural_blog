@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 const StyledMostRead = styled.section`
-  width: 97%;
-  height: 110vh;
+  width: 75%;
+  height: auto;
   margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
-  margin-top: 50px;
-
+  margin-top: 10vh;
+ /* background-color: red; */
   .mostReadContainer {
     width: 55%;
     height: 95%;
     display: flex;
+    /* background-color: green; */
     flex-direction: column;
     justify-content: space-around;
     border-top: 1px solid rgba(0, 0, 0, 0.3);
@@ -24,9 +25,10 @@ const StyledMostRead = styled.section`
     line-height: 3;
     font-weight: 800;
     width: 95%;
-    /* font-style: italic; */
-    letter-spacing: -1.6px;
+    font-style: italic;
+    letter-spacing: -1px;
     margin: auto;
+    padding: 5px;
   }
 
   .mostRead {
@@ -36,12 +38,14 @@ const StyledMostRead = styled.section`
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    /* padding-bottom: 30px; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   .mostReadNumber {
-    width: 7%;
+    /* width: 7% */
     height: 95%;
+    padding: 10px;
     color: red;
     font-size: 55px;
     display: flex;
@@ -52,7 +56,7 @@ const StyledMostRead = styled.section`
   }
 
   .mostReadTextContainer {
-    width: 60%;
+    width: 100%;
     height: 90%;
     font-size: 20px;
     line-height: 1.4;
@@ -61,12 +65,14 @@ const StyledMostRead = styled.section`
   .mostReadTextContainer:hover {
     text-decoration: underline;
     color: #0088ff;
+    cursor: pointer;
   }
 
   .mostReadImg {
     width: 30%;
-    height: 90%;
+    height: auto;
     position: relative;
+    padding: 15px;
   }
 
   .mostReadHeroBanner {
@@ -81,8 +87,8 @@ const StyledMostRead = styled.section`
 
   .mostReadHeroImg {
     width: 98%;
-    height: 70%;
-    /* position: relative; */
+    height: 40vh;
+    position: relative;
     margin: auto;
   }
   .mostReadHeroTextContainer {
@@ -111,11 +117,17 @@ const StyledMostRead = styled.section`
     font-size: 20px;
   }
 
+  .mostReadHeroMainText:hover{
+  color:#0088ff;
+  text-decoration: underline;
+  cursor: pointer;
+  }
+
   .mostReadHeroSubText {
     line-height: 1.4;
     font-size: 16px;
     margin-top: 10px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* @media (min-width: 769px) and (max-width: 1024px) {}
@@ -126,6 +138,7 @@ const StyledMostRead = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     flex-direction: column-reverse;
     height: auto;
+    width: 100%;
     .mostReadContainer {
       padding-top: 30px;
       width: 100%;
@@ -141,7 +154,7 @@ const StyledMostRead = styled.section`
     }
 
     .mostReadHeroImg {
-      height: auto;
+      height: 250px;
       margin: auto;
     }
 
@@ -158,6 +171,10 @@ const StyledMostRead = styled.section`
 
     .mostReadTextContainer {
       font-size: 15px;
+    }
+
+    .mostReadHeader {
+      text-align: center;
     }
   }
 `;

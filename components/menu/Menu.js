@@ -5,13 +5,30 @@ import MobileMenu from "../mobileMenu/mobileMenu";
 
 function Menu() {
   const router = useRouter();
-
+  console.log(router, "router");
   return (
     <StyledMenu>
       <header>Kulture</header>
       <div className="menuListContainer">
         {nav.map((item) => (
-          <li onClick={() => router.push(item.page)}>{item.item}</li>
+          <li
+            style={{
+              backgroundColor:
+                router.pathname === `${item.page}` ? "#e3173e" : "#333",
+            }}
+            onClick={() =>
+              router.push(
+                item.page,
+                item.page === "_blog" && {
+                  query: {
+                    catergory: "historyandheritage",
+                  },
+                }
+              )
+            }
+          >
+            {item.item}
+          </li>
         ))}
       </div>
       <div className="mobileMenuContainer">
@@ -32,21 +49,21 @@ export const nav = [
   {
     _id: "hdhddhdhsa",
     item: "Videos",
-    page: "_videos",
+    page: "/_videos",
   },
   {
     _id: "hdhskksadd",
-    item: "Posts",
-    page: "_blog",
+    item: "Articles",
+    page: "/_blog",
   },
-  {
-    _id: "hdhd",
-    item: "Bookshop",
-    page: "_bookshop",
-  },
-  {
-    _id: "hdhd",
-    item: "Contact Us",
-    page: "_contact",
-  },
+  // {
+  //   _id: "hdhd",
+  //   item: "Bookshop",
+  //   page: "_bookshop",
+  // },
+  // {
+  //   _id: "hdhd",
+  //   item: "Contact Us",
+  //   page: "_contact",
+  // },
 ];

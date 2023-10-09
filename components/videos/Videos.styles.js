@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const StyledVideos = styled.section`
-  width: 100%;
-  height: 114vh;
+  width: 75%;
+  height: auto;
   margin: auto;
+  padding-top: 5vh;
 
   .headerVideos {
     color: #e3120b;
@@ -20,6 +21,7 @@ const StyledVideos = styled.section`
     width: 95%;
     height: 95%;
     margin: auto;
+    padding-top: 50px;
   }
 
   .videoContainer {

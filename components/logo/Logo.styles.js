@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledLogo = styled.section`
-  width: 80%;
+  width: 100%;
   margin: auto;
   height: auto;
   /* display: none; */
@@ -16,8 +16,9 @@ const StyledLogo = styled.section`
 
   .logo {
     text-align: center;
-    font-size: 80px;
-    font-weight: 600;
+    font-size: 50px;
+    /* padding: 10px; */
+    font-weight: 500;
     letter-spacing: -4px;
     color: #0088ff;
   }

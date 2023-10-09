@@ -10,15 +10,16 @@ const StyledMenu = styled.section`
   position: relative;
 
   header {
-    width: 15%;
+    width: auto;
+    padding:  2px 8px 2px 15px;
     text-align: center;
     display: flex;
-    font-weight: 800;
+    font-weight: 600;
     align-items: center;
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
     background-color: #0088ff;
-    justify-content: center;
+    justify-content: flex-end;
   }
   /* display: none; */
   .menuListContainer {
@@ -33,24 +34,23 @@ const StyledMenu = styled.section`
     margin: auto;
   }
 
-  #mobileMenuIcon {
-    color: #fff;
-    font-size: 40px;
-  }
+ 
 
   .menuListContainer li {
-    font-weight: 800;
+    font-weight: 600;
     text-transform: uppercase;
     list-style: none;
-    width: 10%;
+    padding: 0px 7px 0px 7px;
+    width: auto;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
   }
 
   .menuListContainer li:hover {
-    background-color: #0088ff;
+    background-color: #0088ff !important;
     cursor: pointer;
   }
 

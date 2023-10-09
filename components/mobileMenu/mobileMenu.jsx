@@ -43,6 +43,7 @@ const MobileMenuContainer = styled.div`
   align-items: flex-end;
   padding: 20px;
   z-index: 10;
+  /* background-color: red; */
 
   .icon {
     font-size: 40px;
