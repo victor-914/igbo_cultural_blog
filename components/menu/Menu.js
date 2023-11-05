@@ -5,7 +5,6 @@ import MobileMenu from "../mobileMenu/mobileMenu";
 
 function Menu() {
   const router = useRouter();
-  console.log(router, "router");
   return (
     <StyledMenu>
       <header>Kulture</header>
@@ -50,6 +49,11 @@ export const nav = [
     _id: "hdhddhdhsa",
     item: "Videos",
     page: "/_videos",
+  },
+  {
+    _id: "hdhdjdhdhsa",
+    item: "Bookshop",
+    page: "/_bookshop",
   },
   {
     _id: "hdhskksadd",
