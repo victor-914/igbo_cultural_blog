@@ -11,14 +11,13 @@ function _Videos({ videoProps }) {
   const router = useRouter();
 
   const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/lectures?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=15`,
+    `${process.env.NEXT_PUBLIC_URL}/api/books?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=15`,
     fetcher,
     {
       fallbackData: videoProps,
     }
   );
 
-  console.log(data);
 
   useEffect(() => {
     setVideos(data?.data);
@@ -30,7 +29,7 @@ function _Videos({ videoProps }) {
   return (
     <StyledVideos>
       {" "}
-      <header>Videos</header>
+      <header>Bo</header>
       <main className="tabContContainer">
         {videos.length !== 0 ? (
           videos?.map((item) => <VideoCard key={item.id} data={item} />)
@@ -146,7 +145,7 @@ const StyledVideos = styled.section`
 
 export const getStaticProps = async () => {
   const videos = await api.get(
-    `api/lectures?populate=*&pagination[page]=1&pagination[pageSize]=15`
+    `/books?populate=*&pagination[page]=1&pagination[pageSize]=15`
   );
   let videoProps = videos.data;
   return { props: { videoProps } };

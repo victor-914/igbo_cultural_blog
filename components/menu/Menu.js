@@ -50,24 +50,15 @@ export const nav = [
     item: "Videos",
     page: "/_videos",
   },
-  {
-    _id: "hdhdjdhdhsa",
-    item: "Bookshop",
-    page: "/_bookshop",
-  },
+  // {
+  //   _id: "hdhdjdhdhsa",
+  //   item: "Bookshop",
+  //   page: "/_bookshop",
+  // },
   {
     _id: "hdhskksadd",
     item: "Articles",
     page: "/_blog",
   },
-  // {
-  //   _id: "hdhd",
-  //   item: "Bookshop",
-  //   page: "_bookshop",
-  // },
-  // {
-  //   _id: "hdhd",
-  //   item: "Contact Us",
-  //   page: "_contact",
-  // },
+  
 ];

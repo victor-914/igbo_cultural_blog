@@ -74,7 +74,7 @@ export async function getStaticPaths() {
   const paths = res?.data?.data?.map((item) => ({
     params: { blogId: item.id.toString() },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {

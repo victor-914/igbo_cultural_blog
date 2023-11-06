@@ -5,7 +5,6 @@ function Embed({ data }) {
   const [iframeUrl, setIframeUrl] = useState(
     data?.data?.attributes?.video_iframe_link
   );
-  console.log(iframeUrl, "iframeUrl");
   return (
     <StyledEmbed>
       <header
@@ -18,7 +17,6 @@ function Embed({ data }) {
       <iframe
         src={iframeUrl}
         title="YouTube video player"
-        // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
         width="100%"
         height="100%"
@@ -31,15 +29,15 @@ function Embed({ data }) {
 export default Embed;
 
 export async function getStaticPaths() {
-  const res = await api.get(`api/lectures`);
+  const res = await api.get(`/videos`);
   const paths = res?.data?.data?.map((item) => ({
     params: { embedId: item.id.toString() },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  let data = await api.get(`api/lectures/${params.embedId.toString()}?populate=*`);
+  let data = await api.get(`/videos/${params.embedId.toString()}?populate=*`);
   data = data?.data;
   return { props: { data } };
 }

@@ -5,25 +5,25 @@ function Embed({ data }) {
   const [iframeUrl, setIframeUrl] = useState(
     data?.data?.attributes?.video_iframe_link
   );
-  console.log(iframeUrl, "iframeUrl");
   return (
     <StyledEmbed>
-      <header
-        style={{
-          padding: "10px",
-        }}
-      >
-        {data?.data?.attributes?.title}
-      </header>
-      <iframe
-        src={iframeUrl}
-        title="YouTube video player"
-        // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        width="100%"
-        height="100%"
-        frameborder="0"
-      ></iframe>
+      {/* // <header  */}
+      {/* //   style={{ */}
+      {/* //     padding: "10px",
+      //   }}
+      // >
+      //   Bookshop
+      //   {data?.data?.attributes?.title} 
+      // </header>
+      // <iframe
+      //   src={iframeUrl}
+      //   title="YouTube video player"
+      //   // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      //   allowfullscreen
+      //   width="100%"
+      //   height="100%"
+      //   frameborder="0"
+      // ></iframe> */}
     </StyledEmbed>
   );
 }
@@ -31,7 +31,7 @@ function Embed({ data }) {
 export default Embed;
 
 export async function getStaticPaths() {
-  const res = await api.get(`api/lectures`);
+  const res = await api.get(`/books`);
   const paths = res?.data?.data?.map((item) => ({
     params: { embedId: item.id.toString() },
   }));
@@ -39,7 +39,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  let data = await api.get(`api/lectures/${params.embedId.toString()}?populate=*`);
+  let data = await api.get(`/books/${params.bookId.toString()}?populate=*`);
   data = data?.data;
   return { props: { data } };
 }
